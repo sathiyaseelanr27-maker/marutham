@@ -27,18 +27,21 @@
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
   .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
   .mobile-menu {
-    display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 99;
-    background: white; border-bottom: 1px solid var(--border);
-    flex-direction: column; padding: 12px 1rem;
+    display: none; position: fixed; top: 60px; left: 0; right: 0; bottom: 0; z-index: 999;
+    background: white; overflow-y: auto;
+    flex-direction: column; padding: 8px 0;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a { font-size: 15px; color: var(--text); text-decoration: none; padding: 12px 0; border-bottom: 1px solid var(--border); font-family: 'Noto Sans Tamil', sans-serif; }
+  body.menu-open { overflow: hidden; }
+  .mobile-menu a { font-size: 16px; color: var(--text); text-decoration: none; padding: 16px 1.5rem; border-bottom: 1px solid var(--border); font-family: 'Noto Sans Tamil', sans-serif; display: block; }
   .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:active { background: var(--green-light); }
   @media (max-width: 768px) { .hamburger { display: flex; } }
 
   /* LANGUAGE TOGGLE */
   .lang-bar {
-    background: var(--green); padding: 6px 2rem;
+    background: var(--green); padding: 6px 2rem; position: relative; z-index: 1001;
     display: flex; justify-content: flex-end; align-items: center; gap: 8px;
   }
   .lang-btn {
@@ -52,7 +55,7 @@
   /* HEADER */
   header {
     background: var(--white); border-bottom: 1px solid var(--border);
-    position: sticky; top: 0; z-index: 100;
+    position: sticky; top: 0; z-index: 1000;
     padding: 0 2rem;
     display: flex; align-items: center; justify-content: space-between;
     height: 70px;
@@ -798,11 +801,28 @@ const translations = {
 
 function toggleMenu() {
   const m = document.getElementById('mobile-menu');
-  m.classList.toggle('open');
+  const isOpen = m.classList.toggle('open');
+  document.body.classList.toggle('menu-open', isOpen);
+  const h = document.getElementById('hamburger');
+  h.querySelector('span:nth-child(1)').style.transform = isOpen ? 'rotate(45deg) translate(5px,5px)' : '';
+  h.querySelector('span:nth-child(2)').style.opacity = isOpen ? '0' : '1';
+  h.querySelector('span:nth-child(3)').style.transform = isOpen ? 'rotate(-45deg) translate(5px,-5px)' : '';
 }
 function closeMenu() {
-  document.getElementById('mobile-menu').classList.remove('open');
+  const m = document.getElementById('mobile-menu');
+  m.classList.remove('open');
+  document.body.classList.remove('menu-open');
+  const h = document.getElementById('hamburger');
+  h.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = '1'; });
 }
+// Close menu when clicking outside
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('mobile-menu');
+  const btn = document.getElementById('hamburger');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+    closeMenu();
+  }
+});
 
 function setLang(lang) {
   const t = translations[lang];

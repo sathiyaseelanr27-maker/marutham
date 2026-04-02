@@ -222,6 +222,55 @@
     .contact-grid { grid-template-columns: 1fr; }
     .services-grid { grid-template-columns: 1fr 1fr; }
   }
+
+  /* GALLERY */
+  #gallery { background: var(--bg); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 16px; margin-top: 48px;
+  }
+  .gallery-item { border-radius: 14px; overflow: hidden; position: relative; background: #eee; }
+  .gallery-item.tall { grid-row: span 2; }
+  .gallery-item.wide { grid-column: span 2; }
+  .gallery-item img { width: 100%; height: 220px; object-fit: cover; object-position: center; display: block; transition: transform 0.3s; }
+  .gallery-item.tall img { height: 456px; }
+  .gallery-item.wide img { height: 220px; }
+  .gallery-item:hover img { transform: scale(1.03); }
+  .gallery-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.65));
+    color: white; padding: 20px 12px 10px;
+    font-size: 12px; font-family: 'Noto Sans Tamil', sans-serif;
+  }
+  /* PACKAGES */
+  #packages { background: white; }
+  .packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 24px; margin-top: 48px; }
+  .pkg-card {
+    border: 1px solid var(--border); border-radius: 16px; padding: 24px;
+    background: var(--bg); position: relative; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .pkg-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .pkg-card.featured { border: 2px solid var(--green); background: white; }
+  .pkg-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--green); color: white; font-size: 11px; padding: 3px 14px;
+    border-radius: 20px; font-family: 'Noto Sans Tamil', sans-serif; white-space: nowrap;
+  }
+  .pkg-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 12px; }
+  .pkg-price { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--green); font-weight: 700; margin-bottom: 6px; }
+  .pkg-name { font-family: 'Noto Sans Tamil', sans-serif; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .pkg-list { list-style: none; margin-top: 14px; }
+  .pkg-list li { font-size: 12px; color: var(--text-muted); font-family: 'Noto Sans Tamil', sans-serif; padding: 5px 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
+  .pkg-list li:last-child { border-bottom: none; }
+  .pkg-list li::before { content: "✓ "; color: var(--green); font-weight: 600; }
+  @media (max-width: 700px) {
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item.tall { grid-row: span 1; }
+    .gallery-item.wide { grid-column: span 2; }
+  }
+
 </style>
 </head>
 <body>
@@ -240,12 +289,16 @@
     </div>
     <div class="logo-text">
       <h1 id="hdr-name">மருதம் மருத்துவ மையம்</h1>
-      <p id="hdr-loc">Marutham Medical Centre · Kattumavadi</p>
+      <p id="hdr-loc">Marutham Medical Centre · Kattumavadi, Coimbatore</p>
     </div>
   </div>
   <nav>
     <a href="#doctors" data-ta="மருத்துவர்கள்" data-en="Doctors">மருத்துவர்கள்</a>
+    <a href="#packages" data-ta="தொகுப்புகள்" data-en="Packages">தொகுப்புகள்</a>
+    <a href="#gallery" data-ta="படங்கள்" data-en="Gallery">படங்கள்</a>
     <a href="#services" data-ta="சேவைகள்" data-en="Services">சேவைகள்</a>
+    <a href="#packages" data-ta="தொகுப்புகள்" data-en="Packages">தொகுப்புகள்</a>
+    <a href="#gallery" data-ta="படங்கள்" data-en="Gallery">படங்கள்</a>
     <a href="#contact" data-ta="தொடர்பு" data-en="Contact">தொடர்பு</a>
   </nav>
 </header>
@@ -253,7 +306,7 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-text">
-    <div class="hero-badge">● <span id="hero-badge">கட்டுமாவடி நம்பகமான சுகாதார சேவை</span></div>
+    <div class="hero-badge">● <span id="hero-badge">கோயம்புத்தூரில் நம்பகமான சுகாதார சேவை</span></div>
     <h2 id="hero-title">உங்கள் ஆரோக்கியம்,<br>எங்கள் பொறுப்பு</h2>
     <p id="hero-desc">மருதம் மருத்துவ மையம் — பொது அறுவை சிகிச்சை, மயக்க மருந்து மற்றும் எலும்பியல் நிபுணர்கள் ஒரே கூரையின் கீழ் தரமான சேவை வழங்குகிறோம்.</p>
     <div class="hero-btns">
@@ -412,6 +465,62 @@
   </div>
 </section>
 
+
+<!-- HEALTH PACKAGES -->
+<section id="packages">
+  <span class="section-label" id="pkg-label">சிறப்பு சலுகை</span>
+  <h2 class="section-title" id="pkg-title">ஆரோக்கிய சோதனை தொகுப்புகள்</h2>
+  <p class="section-sub" id="pkg-sub">மலிவான விலையில் முழுமையான உடல் நல சோதனை.</p>
+
+  <div class="packages-grid">
+    <div class="pkg-card">
+      <div class="pkg-icon" style="background:#fde8e8;">🩸</div>
+      <div class="pkg-price">₹799</div>
+      <h4 class="pkg-name">சர்க்கரை நோய் பரிசோதனை தொகுப்பு</h4>
+      <div class="en-h4">Diabetes Check-up</div>
+      <ul class="pkg-list">
+        <li>முழு இரத்த அணுக்கள் பரிசோதனை (CBC)</li>
+        <li>HbA1c (சர்க்கரை அளவு)</li>
+        <li>சிறுநீரக செயல்பாடு (RFT)</li>
+        <li>PPBS (சாப்பிட்ட பின் சர்க்கரை)</li>
+        <li>சிறுநீர் பரிசோதனை (Urine Routine)</li>
+      </ul>
+    </div>
+    <div class="pkg-card featured">
+      <div class="pkg-badge">பிரபல தொகுப்பு</div>
+      <div class="pkg-icon" style="background:#e8f5e9;">🫀</div>
+      <div class="pkg-price">₹1,500</div>
+      <h4 class="pkg-name">கல்லீரல் மற்றும் இதய பரிசோதனை</h4>
+      <div class="en-h4">Liver & Cardiac Check-up</div>
+      <ul class="pkg-list">
+        <li>முழு இரத்த அணுக்கள் பரிசோதனை (CBC)</li>
+        <li>கல்லீரல் செயல்பாடு (LFT)</li>
+        <li>சர்க்கரை பரிசோதனை</li>
+        <li>சீரம் லிப்பிட்ஸ்</li>
+        <li>சிறுநீரக செயல்பாடு (RFT)</li>
+        <li>சிறுநீர் பரிசோதனை</li>
+        <li>சிறப்பு மருத்துவ ஆலோசனை</li>
+      </ul>
+    </div>
+    <div class="pkg-card">
+      <div class="pkg-icon" style="background:#e8eaf6;">❤️</div>
+      <div class="pkg-price">₹2,500</div>
+      <h4 class="pkg-name">முழு உடல் சோதனை தொகுப்பு</h4>
+      <div class="en-h4">Master Health Check-up</div>
+      <ul class="pkg-list">
+        <li>HbA1c, FBS, PPBS</li>
+        <li>கல்லீரல் செயல்பாடு (LFT)</li>
+        <li>சிறுநீரக செயல்பாடு (RFT)</li>
+        <li>தைராய்டு (TSH)</li>
+        <li>இதய மின்னலை (ECG)</li>
+        <li>சீரம் லிப்பிட்ஸ்</li>
+        <li>மருத்துவ ஆலோசனை</li>
+      </ul>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:24px;font-family:'Noto Sans Tamil',sans-serif;color:var(--text-muted);font-size:13px;" id="pkg-note">இன்றே பரிசோதனை மேற்கொள்ளுங்கள் · Cell: 81898 98001</p>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <span class="section-label" id="con-label">எங்களை கண்டுபிடியுங்கள்</span>
@@ -428,7 +537,7 @@
         </div>
         <div class="ci-text">
           <strong id="addr-label">முகவரி</strong>
-          <span>மருதம் மருத்துவ மையம்<br>Kattumavadi<br>Tamil Nadu</span>
+          <span>மருதம் மருத்துவ மையம்<br>Kattumavadi, Coimbatore<br>Tamil Nadu</span>
         </div>
       </div>
 
@@ -448,11 +557,11 @@
         </div>
         <div class="ci-text">
           <strong id="phone-label">தொலைபேசி</strong>
-          <span id="phone-val">அவசர அழைப்புகள் மற்றும்<br>ஆலோசனைகளுக்கு தொடர்பு கொள்ளவும்</span>
+          <span id="phone-val">Cell: 81898 98001<br>அவசர அழைப்புகள் மற்றும் ஆலோசனைகளுக்கு</span>
         </div>
       </div>
 
-      <a class="whatsapp-btn" href="https://wa.me/91XXXXXXXXXX" target="_blank">
+      <a class="whatsapp-btn" href="https://wa.me/918189898001" target="_blank">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         <span id="wa-btn">WhatsApp மூலம் தொடர்பு கொள்ளுங்கள்</span>
       </a>
@@ -460,8 +569,39 @@
 
     <div class="map-box">
       <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      <p id="map-text">மருதம் மருத்துவ மையம்<br>Kattumavadi<br><br>Google Maps இல் திறக்க<br>கீழே உள்ள பொத்தானை அழுத்துங்கள்</p>
-      <a href="https://www.google.com/maps/search/Marutham+Medical+Centre+kattumavadi" target="_blank" style="background:var(--green);color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:13px;font-family:'Noto Sans Tamil',sans-serif;" id="maps-btn">Google Maps இல் காண்க</a>
+      <p id="map-text">மருதம் மருத்துவ மையம்<br>Kattumavadi, Coimbatore<br><br>Google Maps இல் திறக்க<br>கீழே உள்ள பொத்தானை அழுத்துங்கள்</p>
+      <a href="https://www.google.com/maps/search/Marutham+Medical+Centre+Coimbatore" target="_blank" style="background:var(--green);color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:13px;font-family:'Noto Sans Tamil',sans-serif;" id="maps-btn">Google Maps இல் காண்க</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- GALLERY -->
+<section id="gallery">
+  <span class="section-label" id="gal-label">எங்கள் மையம்</span>
+  <h2 class="section-title" id="gal-title">புகைப்படங்கள்</h2>
+  <p class="section-sub" id="gal-sub">மருதம் மருத்துவ மையத்தின் உண்மையான தோற்றம்.</p>
+
+  <div class="gallery-grid">
+    <div class="gallery-item tall">
+      <img src="https://raw.githubusercontent.com/YOUR_USERNAME/marutham-medical/main/images/signboard.jpg" alt="மருதம் மருத்துவ மையம் - பலகை">
+      <div class="gallery-caption">மையத்தின் அடையாள பலகை</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://raw.githubusercontent.com/YOUR_USERNAME/marutham-medical/main/images/exterior.jpg" alt="மையத்தின் வெளிப்புறம்">
+      <div class="gallery-caption">மையத்தின் வெளிப்புறம்</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://raw.githubusercontent.com/YOUR_USERNAME/marutham-medical/main/images/interior.jpg" alt="மையத்தின் உட்புறம்">
+      <div class="gallery-caption">மருந்தகம் / உட்புறம்</div>
+    </div>
+    <div class="gallery-item wide">
+      <img src="https://raw.githubusercontent.com/YOUR_USERNAME/marutham-medical/main/images/health-packages.jpg" alt="சுகாதார சோதனை தொகுப்புகள்">
+      <div class="gallery-caption">சுகாதார சோதனை தொகுப்புகள்</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://raw.githubusercontent.com/YOUR_USERNAME/marutham-medical/main/images/awareness.jpg" alt="நலன் விழிப்புணர்வு">
+      <div class="gallery-caption">சமூக நலன் விழிப்புணர்வு</div>
     </div>
   </div>
 </section>
@@ -470,11 +610,15 @@
 <footer>
   <div>
     <div class="f-title">மருதம் மருத்துவ மையம்</div>
-    <p>Marutham Medical Centre · Kattumavadi· © 2025</p>
+    <p>Marutham Medical Centre · Kattumavadi, Coimbatore · © 2025</p>
   </div>
   <div class="footer-links">
     <a href="#doctors" data-ta="மருத்துவர்கள்" data-en="Doctors">மருத்துவர்கள்</a>
+    <a href="#packages" data-ta="தொகுப்புகள்" data-en="Packages">தொகுப்புகள்</a>
+    <a href="#gallery" data-ta="படங்கள்" data-en="Gallery">படங்கள்</a>
     <a href="#services" data-ta="சேவைகள்" data-en="Services">சேவைகள்</a>
+    <a href="#packages" data-ta="தொகுப்புகள்" data-en="Packages">தொகுப்புகள்</a>
+    <a href="#gallery" data-ta="படங்கள்" data-en="Gallery">படங்கள்</a>
     <a href="#contact" data-ta="தொடர்பு" data-en="Contact">தொடர்பு</a>
   </div>
 </footer>
@@ -483,7 +627,7 @@
 const translations = {
   ta: {
     'hdr-name': 'மருதம் மருத்துவ மையம்',
-    'hero-badge': 'கட்டுமாவடி நம்பகமான சுகாதார சேவை',
+    'hero-badge': 'கோயம்புத்தூரில் நம்பகமான சுகாதார சேவை',
     'hero-title': 'உங்கள் ஆரோக்கியம்,<br>எங்கள் பொறுப்பு',
     'hero-desc': 'மருதம் மருத்துவ மையம் — பொது அறுவை சிகிச்சை, மயக்க மருந்து மற்றும் எலும்பியல் நிபுணர்கள் ஒரே கூரையின் கீழ் தரமான சேவை வழங்குகிறோம்.',
     'hero-btn1': 'மருத்துவர்களை காண்க',
@@ -505,14 +649,14 @@ const translations = {
     'con-sub': 'OPD நேரங்களில் நேரில் வாருங்கள் அல்லது WhatsApp மூலம் தொடர்பு கொள்ளுங்கள்.',
     'visit-title': 'எங்கள் இடம்', 'addr-label': 'முகவரி',
     'hours-label': 'OPD நேரம்', 'phone-label': 'தொலைபேசி',
-    'phone-val': 'அவசர அழைப்புகள் மற்றும்<br>ஆலோசனைகளுக்கு தொடர்பு கொள்ளவும்',
+    'phone-val': 'Cell: 81898 98001<br>அவசர அழைப்புகள் மற்றும் ஆலோசனைகளுக்கு',
     'wa-btn': 'WhatsApp மூலம் தொடர்பு கொள்ளுங்கள்',
-    'map-text': 'மருதம் மருத்துவ மையம்<br>கட்டுமாவடி<br><br>Google Maps இல் திறக்க<br>கீழே உள்ள பொத்தானை அழுத்துங்கள்',
+    'map-text': 'மருதம் மருத்துவ மையம்<br>Kattumavadi, Coimbatore<br><br>Google Maps இல் திறக்க<br>கீழே உள்ள பொத்தானை அழுத்துங்கள்',
     'maps-btn': 'Google Maps இல் காண்க'
   },
   en: {
     'hdr-name': 'Marutham Medical Centre',
-    'hero-badge': 'Trusted Healthcare in Kattumavadi',
+    'hero-badge': 'Trusted Healthcare in Coimbatore',
     'hero-title': 'Your Health,<br>Our Priority',
     'hero-desc': 'Marutham Medical Centre brings expert multi-specialty care close to home — with dedicated surgeons, anaesthesiologists, and orthopaedic specialists under one roof.',
     'hero-btn1': 'Meet Our Doctors',
@@ -534,9 +678,9 @@ const translations = {
     'con-sub': 'Walk in during OPD hours or reach us via WhatsApp.',
     'visit-title': 'Visit Us', 'addr-label': 'Address',
     'hours-label': 'OPD Hours', 'phone-label': 'Phone',
-    'phone-val': 'Contact us for emergencies<br>and consultations',
+    'phone-val': 'Cell: 81898 98001<br>Emergency &amp; Consultations',
     'wa-btn': 'Contact via WhatsApp',
-    'map-text': 'Marutham Medical Centre<br>Kattumavadi, <br><br>Click below to open<br>in Google Maps',
+    'map-text': 'Marutham Medical Centre<br>Kattumavadi, Coimbatore<br><br>Click below to open<br>in Google Maps',
     'maps-btn': 'Open in Google Maps'
   }
 };

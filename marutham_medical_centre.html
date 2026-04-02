@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>மருதம் மருத்துவ மையம் | Marutham Medical Centre</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=Noto+Sans+Tamil:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #0F6E56;
+    --green-light: #E1F5EE;
+    --green-mid: #1D9E75;
+    --gold: #BA7517;
+    --gold-light: #FAEEDA;
+    --text: #2C2C2A;
+    --text-muted: #5F5E5A;
+    --border: rgba(0,0,0,0.1);
+    --white: #ffffff;
+    --bg: #f8faf9;
+  }
+  body { font-family: 'DM Sans', 'Noto Sans Tamil', sans-serif; color: var(--text); background: var(--bg); }
+  .ta { font-family: 'Noto Sans Tamil', sans-serif; }
+
+  /* LANGUAGE TOGGLE */
+  .lang-bar {
+    background: var(--green); padding: 6px 2rem;
+    display: flex; justify-content: flex-end; align-items: center; gap: 8px;
+  }
+  .lang-btn {
+    background: transparent; border: 1px solid rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.7); padding: 3px 12px; border-radius: 20px;
+    font-size: 12px; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .lang-btn.active { background: white; color: var(--green); border-color: white; font-weight: 500; }
+
+  /* HEADER */
+  header {
+    background: var(--white); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-icon {
+    width: 42px; height: 42px; background: var(--green);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .logo-icon svg { width: 22px; height: 22px; fill: white; }
+  .logo-text h1 { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--green); line-height: 1.2; }
+  .logo-text p { font-size: 11px; color: var(--text-muted); font-family: 'Noto Sans Tamil', sans-serif; }
+  nav { display: flex; gap: 24px; }
+  nav a { font-size: 14px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  nav a:hover { color: var(--green); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #04342C 0%, #0F6E56 60%, #1D9E75 100%);
+    padding: 80px 2rem 90px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 40px; flex-wrap: wrap; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; right: -60px; top: -60px;
+    width: 400px; height: 400px; border: 60px solid rgba(255,255,255,0.05); border-radius: 50%;
+  }
+  .hero::after {
+    content: ''; position: absolute; right: 80px; bottom: -120px;
+    width: 300px; height: 300px; border: 40px solid rgba(255,255,255,0.04); border-radius: 50%;
+  }
+  .hero-text { max-width: 560px; position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.15); color: white;
+    padding: 5px 14px; border-radius: 20px; font-size: 12px;
+    margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2);
+    font-family: 'Noto Sans Tamil', sans-serif;
+  }
+  .hero h2 {
+    font-family: 'Noto Sans Tamil', serif;
+    font-size: 42px; color: white; line-height: 1.25;
+    margin-bottom: 18px; font-weight: 600;
+  }
+  .hero p { color: rgba(255,255,255,0.85); font-size: 16px; line-height: 1.8; margin-bottom: 32px; font-family: 'Noto Sans Tamil', sans-serif; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-white {
+    background: white; color: var(--green); padding: 13px 24px;
+    border-radius: 9px; font-size: 14px; font-weight: 500; border: none;
+    cursor: pointer; font-family: 'Noto Sans Tamil', sans-serif; transition: transform 0.15s;
+  }
+  .btn-white:hover { transform: translateY(-1px); }
+  .hero-stats { display: flex; gap: 32px; position: relative; z-index: 1; }
+  .stat { text-align: center; }
+  .stat strong { display: block; font-family: 'Playfair Display', serif; font-size: 34px; color: white; }
+  .stat span { font-size: 11px; color: rgba(255,255,255,0.75); font-family: 'Noto Sans Tamil', sans-serif; }
+
+  /* TIMING BANNER */
+  .timing-banner {
+    background: var(--gold-light); border-bottom: 1px solid #FAC775;
+    padding: 14px 2rem; display: flex; gap: 32px; flex-wrap: wrap; justify-content: center;
+  }
+  .timing-item { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+  .timing-item strong { color: var(--gold); font-family: 'Noto Sans Tamil', sans-serif; }
+  .timing-item span { color: var(--text-muted); font-family: 'Noto Sans Tamil', sans-serif; }
+
+  /* SECTIONS */
+  section { padding: 70px 2rem; }
+  .section-label {
+    display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    color: var(--green); background: var(--green-light);
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 10px;
+    font-family: 'Noto Sans Tamil', sans-serif;
+  }
+  .section-title {
+    font-family: 'Noto Sans Tamil', sans-serif; font-size: 30px; font-weight: 600;
+    color: var(--text); margin-bottom: 10px; line-height: 1.3;
+  }
+  .section-sub { color: var(--text-muted); font-size: 15px; max-width: 520px; line-height: 1.8; font-family: 'Noto Sans Tamil', sans-serif; }
+
+  /* DOCTORS */
+  #doctors { background: white; }
+  .doctors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 48px; }
+  .doctor-card {
+    border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    background: white; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .doctor-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .doc-header {
+    background: linear-gradient(135deg, var(--green-light), #c8eee2);
+    padding: 28px 24px 22px; display: flex; align-items: center; gap: 16px;
+  }
+  .doc-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--green); display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 22px; color: white; font-weight: 600;
+    flex-shrink: 0; border: 3px solid white;
+  }
+  .doc-name h3 { font-family: 'Noto Sans Tamil', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 3px; line-height: 1.4; }
+  .doc-name .en-name { font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text-muted); }
+  .doc-name .role { font-size: 12px; color: var(--green); font-weight: 500; font-family: 'Noto Sans Tamil', sans-serif; margin-top: 2px; }
+  .doc-qual {
+    display: inline-block; background: white; color: var(--text-muted);
+    font-size: 11px; padding: 3px 10px; border-radius: 20px;
+    border: 1px solid var(--border); margin-top: 8px;
+  }
+  .doc-body { padding: 18px 24px; }
+  .spec-tag {
+    display: inline-block; background: var(--green-light); color: var(--green);
+    font-size: 11px; padding: 3px 10px; border-radius: 20px; margin: 3px 3px 3px 0;
+    font-family: 'Noto Sans Tamil', sans-serif;
+  }
+  .doc-timing {
+    margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .doc-timing p { font-size: 12px; color: var(--text-muted); line-height: 1.7; font-family: 'Noto Sans Tamil', sans-serif; }
+  .doc-timing strong { color: var(--text); }
+
+  /* SERVICES */
+  #services { background: var(--bg); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; margin-top: 48px; }
+  .service-card {
+    background: white; border: 1px solid var(--border); border-radius: 14px;
+    padding: 24px 20px; transition: border-color 0.2s;
+  }
+  .service-card:hover { border-color: var(--green-mid); }
+  .service-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--green-light); display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+  }
+  .service-icon svg { width: 22px; height: 22px; stroke: var(--green); fill: none; stroke-width: 1.8; }
+  .service-card h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; font-family: 'Noto Sans Tamil', sans-serif; }
+  .service-card .en-h4 { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+  .service-card p { font-size: 12px; color: var(--text-muted); line-height: 1.6; font-family: 'Noto Sans Tamil', sans-serif; }
+
+  /* CONTACT */
+  #contact { background: white; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; }
+  .contact-info h3 { font-family: 'Noto Sans Tamil', sans-serif; font-size: 22px; font-weight: 600; margin-bottom: 24px; }
+  .contact-item { display: flex; gap: 14px; margin-bottom: 20px; }
+  .ci-icon {
+    width: 42px; height: 42px; background: var(--green-light); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .ci-icon svg { width: 18px; height: 18px; stroke: var(--green); fill: none; stroke-width: 1.8; }
+  .ci-text strong { display: block; font-size: 13px; font-weight: 600; margin-bottom: 3px; font-family: 'Noto Sans Tamil', sans-serif; }
+  .ci-text span { font-size: 13px; color: var(--text-muted); line-height: 1.8; font-family: 'Noto Sans Tamil', sans-serif; }
+  .map-box {
+    border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
+    background: var(--green-light); height: 320px;
+    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px;
+  }
+  .map-box svg { width: 48px; height: 48px; stroke: var(--green); fill: none; stroke-width: 1.5; opacity: 0.6; }
+  .map-box p { font-size: 13px; color: var(--green); font-family: 'Noto Sans Tamil', sans-serif; text-align: center; line-height: 1.8; }
+  .whatsapp-btn {
+    display: flex; align-items: center; gap: 10px; justify-content: center;
+    background: #25D366; color: white; border: none; border-radius: 10px;
+    padding: 14px 20px; font-size: 15px; font-weight: 500; cursor: pointer;
+    font-family: 'Noto Sans Tamil', sans-serif; margin-top: 20px; width: 100%;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .whatsapp-btn:hover { background: #1ebe5d; }
+
+  /* FOOTER */
+  footer {
+    background: #04342C; color: rgba(255,255,255,0.75);
+    padding: 40px 2rem 28px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+  }
+  footer .f-title { font-family: 'Noto Sans Tamil', sans-serif; font-size: 15px; color: white; font-weight: 600; }
+  footer p { font-size: 12px; margin-top: 4px; font-family: 'Noto Sans Tamil', sans-serif; }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; font-family: 'Noto Sans Tamil', sans-serif; }
+  .footer-links a:hover { color: white; }
+
+  @media (max-width: 700px) {
+    .hero h2 { font-size: 28px; }
+    .hero-stats { gap: 20px; }
+    nav { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LANGUAGE BAR -->
+<div class="lang-bar">
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+  <button class="lang-btn active" id="btn-ta" onclick="setLang('ta')">தமிழ்</button>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+    </div>
+    <div class="logo-text">
+      <h1 id="hdr-name">மருதம் மருத்துவ மையம்</h1>
+      <p id="hdr-loc">Marutham Medical Centre · Kattumavadi, Coimbatore</p>
+    </div>
+  </div>
+  <nav>
+    <a href="#doctors" data-ta="மருத்துவர்கள்" data-en="Doctors">மருத்துவர்கள்</a>
+    <a href="#services" data-ta="சேவைகள்" data-en="Services">சேவைகள்</a>
+    <a href="#contact" data-ta="தொடர்பு" data-en="Contact">தொடர்பு</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">● <span id="hero-badge">கோயம்புத்தூரில் நம்பகமான சுகாதார சேவை</span></div>
+    <h2 id="hero-title">உங்கள் ஆரோக்கியம்,<br>எங்கள் பொறுப்பு</h2>
+    <p id="hero-desc">மருதம் மருத்துவ மையம் — பொது அறுவை சிகிச்சை, மயக்க மருந்து மற்றும் எலும்பியல் நிபுணர்கள் ஒரே கூரையின் கீழ் தரமான சேவை வழங்குகிறோம்.</p>
+    <div class="hero-btns">
+      <button class="btn-white" onclick="document.getElementById('doctors').scrollIntoView({behavior:'smooth'})" id="hero-btn1">மருத்துவர்களை காண்க</button>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><strong>3+</strong><span id="stat1">நிபுணர்கள்</span></div>
+    <div class="stat"><strong>6</strong><span id="stat2">நாட்கள் / வாரம்</span></div>
+    <div class="stat"><strong>24h</strong><span id="stat3">அவசர சேவை</span></div>
+  </div>
+</div>
+
+<!-- TIMING BANNER -->
+<div class="timing-banner">
+  <div class="timing-item">
+    <span>🕗</span>
+    <div><strong id="t1-label">காலை OPD: </strong><span id="t1-val">காலை 08:00 – 10:00 மணி (தினமும்)</span></div>
+  </div>
+  <div class="timing-item">
+    <span>🌆</span>
+    <div><strong id="t2-label">மாலை OPD: </strong><span id="t2-val">மாலை 05:00 – இரவு 09:00 மணி (தினமும்)</span></div>
+  </div>
+  <div class="timing-item">
+    <span>🦴</span>
+    <div><strong id="t3-label">எலும்பியல் (புதன்): </strong><span id="t3-val">காலை 11:00 – பகல் 02:00 மணி</span></div>
+  </div>
+</div>
+
+<!-- DOCTORS -->
+<section id="doctors">
+  <span class="section-label" id="doc-label">எங்கள் நிபுணர்கள்</span>
+  <h2 class="section-title" id="doc-title">மருத்துவர்களை சந்தியுங்கள்</h2>
+  <p class="section-sub" id="doc-sub">பொது அறுவை சிகிச்சை, மயக்க மருந்து மற்றும் எலும்பியல் துறைகளில் அனுபவமிக்க நிபுணர்கள்.</p>
+
+  <div class="doctors-grid">
+
+    <!-- Dr Rajadurai -->
+    <div class="doctor-card">
+      <div class="doc-header">
+        <div class="doc-avatar">ரா</div>
+        <div class="doc-name">
+          <h3>டாக்டர். ராஜதுரை குழந்தைசாமி</h3>
+          <div class="en-name">Dr. Rajadurai Kuzhanthasami</div>
+          <div class="role" id="d1-role">பொது அறுவை சிகிச்சை நிபுணர்</div>
+          <span class="doc-qual">MBBS, MS (General Surgery)</span>
+        </div>
+      </div>
+      <div class="doc-body">
+        <span class="spec-tag" data-ta="எண்டோஸ்கோபி" data-en="Endoscopy">எண்டோஸ்கோபி</span>
+        <span class="spec-tag" data-ta="லேப்ரோஸ்கோபி" data-en="Laparoscopy">லேப்ரோஸ்கோபி</span>
+        <span class="spec-tag" data-ta="குடல்வால் அறுவை" data-en="Appendicitis">குடல்வால் அறுவை</span>
+        <span class="spec-tag" data-ta="நீரிழிவு புண் சிகிச்சை" data-en="Diabetic Wounds">நீரிழிவு புண் சிகிச்சை</span>
+        <span class="spec-tag" data-ta="குடலிறக்கம்" data-en="Hernia">குடலிறக்கம்</span>
+        <span class="spec-tag" data-ta="காது அறுவை" data-en="Ear Surgery">காது அறுவை</span>
+        <div class="doc-timing">
+          <span>⏰</span>
+          <p><strong id="d1-t1">தினமும்:</strong> காலை 08:00 – 10:00 மணி<br><span id="d1-t2">மாலை: 05:00 – இரவு 09:00 மணி</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dr Minnalkodi -->
+    <div class="doctor-card">
+      <div class="doc-header">
+        <div class="doc-avatar" style="background:#185FA5;">மி</div>
+        <div class="doc-name">
+          <h3>டாக்டர். A. மின்னல்கொடி</h3>
+          <div class="en-name">Dr. A. Minnalkodi</div>
+          <div class="role" id="d2-role">மயக்க மருந்து நிபுணர்</div>
+          <span class="doc-qual">MBBS, MD (ANAES)</span>
+        </div>
+      </div>
+      <div class="doc-body">
+        <span class="spec-tag" data-ta="பொது மயக்க மருந்து" data-en="General Anaesthesia">பொது மயக்க மருந்து</span>
+        <span class="spec-tag" data-ta="தீவிர சிகிச்சை" data-en="Critical Care">தீவிர சிகிச்சை</span>
+        <span class="spec-tag" data-ta="வலி மேலாண்மை" data-en="Pain Management">வலி மேலாண்மை</span>
+        <span class="spec-tag" data-ta="அறுவை முன் மதிப்பீடு" data-en="Pre-op Assessment">அறுவை முன் மதிப்பீடு</span>
+        <div class="doc-timing">
+          <span>⏰</span>
+          <p><strong id="d2-t1">எல்லா அறுவை சிகிச்சைகளுக்கும்</strong><br><span id="d2-t2">மற்றும் அவசர ஆலோசனைகளுக்கும் கிடைப்பார்.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dr Naseer -->
+    <div class="doctor-card">
+      <div class="doc-header">
+        <div class="doc-avatar" style="background:#854F0B;">நா</div>
+        <div class="doc-name">
+          <h3>டாக்டர். SM. நாசர்</h3>
+          <div class="en-name">Dr. SM. Naseer</div>
+          <div class="role" id="d3-role">எலும்பியல் அறுவை சிகிச்சை நிபுணர்</div>
+          <span class="doc-qual">MBBS, MS (Ortho)</span>
+        </div>
+      </div>
+      <div class="doc-body">
+        <span class="spec-tag" data-ta="எலும்பு முறிவு" data-en="Fractures">எலும்பு முறிவு</span>
+        <span class="spec-tag" data-ta="எலும்பு நோய்கள்" data-en="Bone Disorders">எலும்பு நோய்கள்</span>
+        <span class="spec-tag" data-ta="மூட்டு வலி" data-en="Joint Pain">மூட்டு வலி</span>
+        <span class="spec-tag" data-ta="முதுகெலும்பு சிகிச்சை" data-en="Spine Care">முதுகெலும்பு சிகிச்சை</span>
+        <span class="spec-tag" data-ta="விளையாட்டு காயம்" data-en="Sports Injuries">விளையாட்டு காயம்</span>
+        <div class="doc-timing">
+          <span>⏰</span>
+          <p><strong id="d3-t1">புதன்கிழமை மட்டும்:</strong><br><span id="d3-t2">காலை 11:00 – பகல் 02:00 மணி</span></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <span class="section-label" id="svc-label">நாங்கள் வழங்குவது</span>
+  <h2 class="section-title" id="svc-title">எங்கள் சேவைகள்</h2>
+  <p class="section-sub" id="svc-sub">பல சிறப்பு துறைகளில் விரிவான சிகிச்சை — அக்கறையுடன், திறனுடன்.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2l-5 9h10l-5-9zm0 14a4 4 0 100 8 4 4 0 000-8z"/></svg></div>
+      <h4>பொது அறுவை சிகிச்சை</h4>
+      <div class="en-h4">General Surgery</div>
+      <p>குடல்வால், குடலிறக்கம், புண் சிகிச்சை மற்றும் லேப்ரோஸ்கோபிக் சிகிச்சைகள்.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+      <h4>லேப்ரோஸ்கோபி</h4>
+      <div class="en-h4">Laparoscopy</div>
+      <p>குறைந்த வலியுடன் விரைவான குணமடைவு தரும் நவீன அறுவை சிகிச்சை.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 12h18M12 3v18"/></svg></div>
+      <h4>எண்டோஸ்கோபி</h4>
+      <div class="en-h4">Endoscopy</div>
+      <p>அனுபவமிக்க மருத்துவர்களால் நோய் கண்டறியும் மற்றும் சிகிச்சை எண்டோஸ்கோபி.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 12h6M12 9v6"/></svg></div>
+      <h4>எலும்பியல் சிகிச்சை</h4>
+      <div class="en-h4">Orthopaedics</div>
+      <p>எலும்பு முறிவு, மூட்டு வலி மற்றும் முதுகெலும்பு சிகிச்சை — ஒவ்வொரு புதன்கிழமையும்.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <h4>மயக்க மருந்து சேவை</h4>
+      <div class="en-h4">Anaesthesia</div>
+      <p>அனைத்து அறுவை சிகிச்சைகளுக்கும் பாதுகாப்பான மயக்க மருந்து கண்காணிப்பு.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h4>நீரிழிவு புண் சிகிச்சை</h4>
+      <div class="en-h4">Diabetic Care</div>
+      <p>நீரிழிவு நோயாளிகளுக்கு சிறப்பு புண் மேலாண்மை மற்றும் அறுவை சிகிச்சை.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="section-label" id="con-label">எங்களை கண்டுபிடியுங்கள்</span>
+  <h2 class="section-title" id="con-title">தொடர்பு கொள்ளுங்கள்</h2>
+  <p class="section-sub" id="con-sub">OPD நேரங்களில் நேரில் வாருங்கள் அல்லது WhatsApp மூலம் தொடர்பு கொள்ளுங்கள்.</p>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3 id="visit-title">எங்கள் இடம்</h3>
+
+      <div class="contact-item">
+        <div class="ci-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="ci-text">
+          <strong id="addr-label">முகவரி</strong>
+          <span>மருதம் மருத்துவ மையம்<br>Kattumavadi, Coimbatore<br>Tamil Nadu</span>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="ci-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="ci-text">
+          <strong id="hours-label">OPD நேரம்</strong>
+          <span>காலை: 08:00 – 10:00 மணி<br>மாலை: 05:00 – இரவு 09:00 மணி<br>எலும்பியல் (புதன்): 11:00 – 02:00 மணி</span>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="ci-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.16a16 16 0 006 6l1.52-1.52a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div class="ci-text">
+          <strong id="phone-label">தொலைபேசி</strong>
+          <span id="phone-val">அவசர அழைப்புகள் மற்றும்<br>ஆலோசனைகளுக்கு தொடர்பு கொள்ளவும்</span>
+        </div>
+      </div>
+
+      <a class="whatsapp-btn" href="https://wa.me/91XXXXXXXXXX" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span id="wa-btn">WhatsApp மூலம் தொடர்பு கொள்ளுங்கள்</span>
+      </a>
+    </div>
+
+    <div class="map-box">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <p id="map-text">மருதம் மருத்துவ மையம்<br>Kattumavadi, Coimbatore<br><br>Google Maps இல் திறக்க<br>கீழே உள்ள பொத்தானை அழுத்துங்கள்</p>
+      <a href="https://www.google.com/maps/search/Marutham+Medical+Centre+Coimbatore" target="_blank" style="background:var(--green);color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:13px;font-family:'Noto Sans Tamil',sans-serif;" id="maps-btn">Google Maps இல் காண்க</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="f-title">மருதம் மருத்துவ மையம்</div>
+    <p>Marutham Medical Centre · Kattumavadi, Coimbatore · © 2025</p>
+  </div>
+  <div class="footer-links">
+    <a href="#doctors" data-ta="மருத்துவர்கள்" data-en="Doctors">மருத்துவர்கள்</a>
+    <a href="#services" data-ta="சேவைகள்" data-en="Services">சேவைகள்</a>
+    <a href="#contact" data-ta="தொடர்பு" data-en="Contact">தொடர்பு</a>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  ta: {
+    'hdr-name': 'மருதம் மருத்துவ மையம்',
+    'hero-badge': 'கோயம்புத்தூரில் நம்பகமான சுகாதார சேவை',
+    'hero-title': 'உங்கள் ஆரோக்கியம்,<br>எங்கள் பொறுப்பு',
+    'hero-desc': 'மருதம் மருத்துவ மையம் — பொது அறுவை சிகிச்சை, மயக்க மருந்து மற்றும் எலும்பியல் நிபுணர்கள் ஒரே கூரையின் கீழ் தரமான சேவை வழங்குகிறோம்.',
+    'hero-btn1': 'மருத்துவர்களை காண்க',
+    'stat1': 'நிபுணர்கள்', 'stat2': 'நாட்கள் / வாரம்', 'stat3': 'அவசர சேவை',
+    't1-label': 'காலை OPD: ', 't1-val': 'காலை 08:00 – 10:00 மணி (தினமும்)',
+    't2-label': 'மாலை OPD: ', 't2-val': 'மாலை 05:00 – இரவு 09:00 மணி (தினமும்)',
+    't3-label': 'எலும்பியல் (புதன்): ', 't3-val': 'காலை 11:00 – பகல் 02:00 மணி',
+    'doc-label': 'எங்கள் நிபுணர்கள்', 'doc-title': 'மருத்துவர்களை சந்தியுங்கள்',
+    'doc-sub': 'பொது அறுவை சிகிச்சை, மயக்க மருந்து மற்றும் எலும்பியல் துறைகளில் அனுபவமிக்க நிபுணர்கள்.',
+    'd1-role': 'பொது அறுவை சிகிச்சை நிபுணர்',
+    'd1-t1': 'தினமும்:', 'd1-t2': 'மாலை: 05:00 – இரவு 09:00 மணி',
+    'd2-role': 'மயக்க மருந்து நிபுணர்',
+    'd2-t1': 'எல்லா அறுவை சிகிச்சைகளுக்கும்', 'd2-t2': 'மற்றும் அவசர ஆலோசனைகளுக்கும் கிடைப்பார்.',
+    'd3-role': 'எலும்பியல் அறுவை சிகிச்சை நிபுணர்',
+    'd3-t1': 'புதன்கிழமை மட்டும்:', 'd3-t2': 'காலை 11:00 – பகல் 02:00 மணி',
+    'svc-label': 'நாங்கள் வழங்குவது', 'svc-title': 'எங்கள் சேவைகள்',
+    'svc-sub': 'பல சிறப்பு துறைகளில் விரிவான சிகிச்சை — அக்கறையுடன், திறனுடன்.',
+    'con-label': 'எங்களை கண்டுபிடியுங்கள்', 'con-title': 'தொடர்பு கொள்ளுங்கள்',
+    'con-sub': 'OPD நேரங்களில் நேரில் வாருங்கள் அல்லது WhatsApp மூலம் தொடர்பு கொள்ளுங்கள்.',
+    'visit-title': 'எங்கள் இடம்', 'addr-label': 'முகவரி',
+    'hours-label': 'OPD நேரம்', 'phone-label': 'தொலைபேசி',
+    'phone-val': 'அவசர அழைப்புகள் மற்றும்<br>ஆலோசனைகளுக்கு தொடர்பு கொள்ளவும்',
+    'wa-btn': 'WhatsApp மூலம் தொடர்பு கொள்ளுங்கள்',
+    'map-text': 'மருதம் மருத்துவ மையம்<br>Kattumavadi, Coimbatore<br><br>Google Maps இல் திறக்க<br>கீழே உள்ள பொத்தானை அழுத்துங்கள்',
+    'maps-btn': 'Google Maps இல் காண்க'
+  },
+  en: {
+    'hdr-name': 'Marutham Medical Centre',
+    'hero-badge': 'Trusted Healthcare in Coimbatore',
+    'hero-title': 'Your Health,<br>Our Priority',
+    'hero-desc': 'Marutham Medical Centre brings expert multi-specialty care close to home — with dedicated surgeons, anaesthesiologists, and orthopaedic specialists under one roof.',
+    'hero-btn1': 'Meet Our Doctors',
+    'stat1': 'Specialists', 'stat2': 'Days/Week', 'stat3': 'Emergency',
+    't1-label': 'Morning OPD: ', 't1-val': '08:00 AM – 10:00 AM (Daily)',
+    't2-label': 'Evening OPD: ', 't2-val': '05:00 PM – 09:00 PM (Daily)',
+    't3-label': 'Ortho (Wed): ', 't3-val': '11:00 AM – 02:00 PM',
+    'doc-label': 'Our Specialists', 'doc-title': 'Meet Our Doctors',
+    'doc-sub': 'Experienced specialists committed to quality care across general surgery, anaesthesia, and orthopaedics.',
+    'd1-role': 'General Surgeon',
+    'd1-t1': 'Daily:', 'd1-t2': 'Evening: 05:00 PM – 09:00 PM',
+    'd2-role': 'Anaesthesiologist',
+    'd2-t1': 'Available for all surgical procedures', 'd2-t2': 'and emergency consultations.',
+    'd3-role': 'Orthopaedic Surgeon',
+    'd3-t1': 'Wednesday only:', 'd3-t2': '11:00 AM – 02:00 PM',
+    'svc-label': 'What We Offer', 'svc-title': 'Our Services',
+    'svc-sub': 'Comprehensive care across multiple specialties delivered with precision and compassion.',
+    'con-label': 'Find Us', 'con-title': 'Contact Us',
+    'con-sub': 'Walk in during OPD hours or reach us via WhatsApp.',
+    'visit-title': 'Visit Us', 'addr-label': 'Address',
+    'hours-label': 'OPD Hours', 'phone-label': 'Phone',
+    'phone-val': 'Contact us for emergencies<br>and consultations',
+    'wa-btn': 'Contact via WhatsApp',
+    'map-text': 'Marutham Medical Centre<br>Kattumavadi, Coimbatore<br><br>Click below to open<br>in Google Maps',
+    'maps-btn': 'Open in Google Maps'
+  }
+};
+
+function setLang(lang) {
+  const t = translations[lang];
+  for (const [id, val] of Object.entries(t)) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = val;
+  }
+  document.querySelectorAll('[data-ta]').forEach(el => {
+    el.textContent = el.getAttribute('data-' + lang);
+  });
+  document.getElementById('btn-ta').classList.toggle('active', lang === 'ta');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+}
+
+setLang('ta');
+</script>
+</body>
+</html>

@@ -24,24 +24,71 @@
 
 
   /* HAMBURGER */
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px; height: 40px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    flex-shrink: 0;
+    z-index: 1002;
+    position: relative;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2.5px;
+    background: var(--green); border-radius: 3px;
+    transition: all 0.3s;
+  }
+  /* full-screen overlay menu */
   .mobile-menu {
-    display: none; position: fixed; top: 60px; left: 0; right: 0; bottom: 0; z-index: 999;
-    background: white; overflow-y: auto;
-    flex-direction: column; padding: 8px 0;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 999;
+    background: white;
+    flex-direction: column;
+    overflow-y: auto;
   }
   .mobile-menu.open { display: flex; }
   body.menu-open { overflow: hidden; }
-  .mobile-menu a { font-size: 16px; color: var(--text); text-decoration: none; padding: 16px 1.5rem; border-bottom: 1px solid var(--border); font-family: 'Noto Sans Tamil', sans-serif; display: block; }
-  .mobile-menu a:last-child { border-bottom: none; }
-  .mobile-menu a:active { background: var(--green-light); }
-  @media (max-width: 768px) { .hamburger { display: flex; } }
+  .mobile-menu-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1rem; height: 70px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .mobile-menu-header .logo { display: flex; align-items: center; gap: 12px; }
+  .mobile-menu-close {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: var(--green-light); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: var(--green); font-weight: 500;
+  }
+  .mobile-menu-links { display: flex; flex-direction: column; padding: 8px 0; }
+  .mobile-menu-links a {
+    font-size: 17px; color: var(--text); text-decoration: none;
+    padding: 18px 1.5rem; border-bottom: 1px solid var(--border);
+    font-family: 'Noto Sans Tamil', sans-serif;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .mobile-menu-links a::before {
+    content: ''; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--green); flex-shrink: 0;
+  }
+  .mobile-menu-links a:last-child { border-bottom: none; }
+  .mobile-menu-links a:active { background: var(--green-light); }
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    nav { display: none; }
+  }
 
   /* LANGUAGE TOGGLE */
   .lang-bar {
-    background: var(--green); padding: 6px 2rem; position: relative; z-index: 1001;
+    background: var(--green); padding: 6px 2rem; position: relative; z-index: 1001; display: flex; justify-content: flex-end; align-items: center; gap: 8px;
     display: flex; justify-content: flex-end; align-items: center; gap: 8px;
   }
   .lang-btn {
@@ -399,11 +446,25 @@
   </button>
 </header>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#doctors" onclick="closeMenu()" data-ta="மருத்துவர்கள்" data-en="Doctors">மருத்துவர்கள்</a>
-  <a href="#services" onclick="closeMenu()" data-ta="சேவைகள்" data-en="Services">சேவைகள்</a>
-  <a href="#packages" onclick="closeMenu()" data-ta="தொகுப்புகள்" data-en="Packages">தொகுப்புகள்</a>
-  <a href="#gallery" onclick="closeMenu()" data-ta="படங்கள்" data-en="Gallery">படங்கள்</a>
-  <a href="#contact" onclick="closeMenu()" data-ta="தொடர்பு" data-en="Contact">தொடர்பு</a>
+  <div class="mobile-menu-header">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      </div>
+      <div class="logo-text">
+        <h1 style="font-family:'Playfair Display',serif;font-size:15px;color:var(--green);">மருதம் மருத்துவ மையம்</h1>
+        <p style="font-size:10px;color:var(--text-muted);font-family:'Noto Sans Tamil',sans-serif;">Marutham Medical Centre · Kattumavadi</p>
+      </div>
+    </div>
+    <button class="mobile-menu-close" onclick="closeMenu()">✕</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a href="#doctors" onclick="closeMenu()" data-ta="மருத்துவர்கள்" data-en="Doctors">மருத்துவர்கள்</a>
+    <a href="#services" onclick="closeMenu()" data-ta="சேவைகள்" data-en="Services">சேவைகள்</a>
+    <a href="#packages" onclick="closeMenu()" data-ta="தொகுப்புகள்" data-en="Packages">தொகுப்புகள்</a>
+    <a href="#gallery" onclick="closeMenu()" data-ta="படங்கள்" data-en="Gallery">படங்கள்</a>
+    <a href="#contact" onclick="closeMenu()" data-ta="தொடர்பு" data-en="Contact">தொடர்பு</a>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -803,26 +864,11 @@ function toggleMenu() {
   const m = document.getElementById('mobile-menu');
   const isOpen = m.classList.toggle('open');
   document.body.classList.toggle('menu-open', isOpen);
-  const h = document.getElementById('hamburger');
-  h.querySelector('span:nth-child(1)').style.transform = isOpen ? 'rotate(45deg) translate(5px,5px)' : '';
-  h.querySelector('span:nth-child(2)').style.opacity = isOpen ? '0' : '1';
-  h.querySelector('span:nth-child(3)').style.transform = isOpen ? 'rotate(-45deg) translate(5px,-5px)' : '';
 }
 function closeMenu() {
-  const m = document.getElementById('mobile-menu');
-  m.classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
   document.body.classList.remove('menu-open');
-  const h = document.getElementById('hamburger');
-  h.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = '1'; });
 }
-// Close menu when clicking outside
-document.addEventListener('click', function(e) {
-  const menu = document.getElementById('mobile-menu');
-  const btn = document.getElementById('hamburger');
-  if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
-    closeMenu();
-  }
-});
 
 function setLang(lang) {
   const t = translations[lang];
